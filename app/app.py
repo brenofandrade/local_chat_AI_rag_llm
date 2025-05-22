@@ -13,7 +13,7 @@ import streamlit as st
 PDF_STORAGE_PATH = 'docs/'
 EMBEDDING_MODEL = OllamaEmbeddings(model="mxbai-embed-large")
 DOCUMENT_VECTOR_DB = InMemoryVectorStore(EMBEDDING_MODEL)
-LANGUAGE_MODEL = OllamaLLM(model="deepseek-r1:1.5b")
+LANGUAGE_MODEL = OllamaLLM(model="deepseek-r1:7b")
 PROMPT_TEMPLATE = """Você é um experiente assistente. Use o contexto fornecido para responder à pergunta.
 Se você não tiver certeza, responda que não sabe.
 Seja conciso e mantenha-se atento aos fatos (máximo de 3 sentenças).
