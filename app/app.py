@@ -4,7 +4,7 @@ from langchain_core.vectorstores import InMemoryVectorStore
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_ollama import OllamaEmbeddings
 from langchain_ollama.llms import OllamaLLM
-
+import os
 from datetime import datetime
 import re 
 import streamlit as st 
@@ -13,7 +13,7 @@ import streamlit as st
 PDF_STORAGE_PATH = 'docs/'
 EMBEDDING_MODEL = OllamaEmbeddings(model="mxbai-embed-large")
 DOCUMENT_VECTOR_DB = InMemoryVectorStore(EMBEDDING_MODEL)
-LANGUAGE_MODEL = OllamaLLM(model="deepseek-r1:7b")
+LANGUAGE_MODEL = OllamaLLM(model="deepseek-r1:latest")
 PROMPT_TEMPLATE = """Você é um experiente assistente. Use o contexto fornecido para responder à pergunta.
 Se você não tiver certeza, responda que não sabe.
 Seja conciso e mantenha-se atento aos fatos (máximo de 3 sentenças).
@@ -24,6 +24,8 @@ Contexto: {document_context}
 Resposta:
 """
 
+if not os.path.exists(PDF_STORAGE_PATH):
+    os.makedirs(PDF_STORAGE_PATH)
 
 # Aux. Functions 
 def extract_answer(text):
